@@ -42,15 +42,15 @@ end
 end
 
 def turn_count(board)
-    counter = 0
+    count = 0
     board.each do |board_space|
         if board_space == "X"
-        counter += 1
+        count += 1
         elsif board_space == "O"
-        counter += 1
+        count += 1
         end
     end
-counter 
+count 
 end
 
 def current_player(board)
@@ -66,20 +66,12 @@ def turn(board)
     user_input = gets.strip
     index = input_to_index(user_input)
     if valid_move?(board, index)
-        move(board, index, player = "X")
+        move(board, index, current_player(board))
     else
         turn(board)
     end
     display_board(board)
 end
-
-def play(board)
-    counter = 0
-    while counter < 9
-      turn(board)
-      counter += 1
-    end
-  end
  
 def won?(board)
 WIN_COMBINATIONS.detect do |winning_combo|
@@ -105,4 +97,13 @@ if wins = won?(board)
 end
 end
 
-
+def play(board)
+    until won?(board) || draw?(board) || over?(board)
+      turn(board)
+    end
+        if won?(board)
+        puts "Congratulations #{winner(board)}!"
+        elsif draw?(board)
+            puts "Cat's Game!"
+end
+end
