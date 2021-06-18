@@ -92,7 +92,6 @@ def full?(board)
 end
 
 def draw?(board)
-  #board.all?{|space| space == "X" || space =="O"} 
   full?(board) && !won?(board)
 end
 
